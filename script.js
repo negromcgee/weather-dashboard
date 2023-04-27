@@ -1,7 +1,7 @@
 // Global variables
 var searchHistory = [];
 var weatherApiRootUrl = 'https://api.openweathermap.org';
-var weatherApiKey = 'd91f911bcf2c0f925fb6535547a5ddc9';
+var weatherApiKey = "d91f911bcf2c0f925fb6535547a5ddc9";
 
 // DOM element references
 var searchForm = document.querySelector('#search-form');
@@ -13,7 +13,6 @@ var searchHistoryContainer = document.querySelector('#history');
 // Add timezone plugins to day.js
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
-
 // Function to display the search history list.
 function renderSearchHistory() {
   searchHistoryContainer.innerHTML = '';
@@ -179,7 +178,7 @@ function fetchWeather(location) {
   var { lon } = location;
   var city = location.name;
 
-  var apiUrl = `${weatherApiRootUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
+  var apiUrl = "${https://api.openweathermap.org}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${186388b4dd9e731049fc26ae93a4789f}";
 
   fetch(apiUrl)
     .then(function (res) {
@@ -194,7 +193,7 @@ function fetchWeather(location) {
 }
 
 function fetchCoords(search) {
-  var apiUrl = `${weatherApiRootUrl}/geo/1.0/direct?q=${search}&limit=5&appid=${weatherApiKey}`;
+  var apiUrl = "${https://api.openweathermap.org}/geo/1.0/direct?q=${search}&limit=5&appid=${186388b4dd9e731049fc26ae93a4789f}";
 
   fetch(apiUrl)
     .then(function (res) {
@@ -239,3 +238,4 @@ function handleSearchHistoryClick(e) {
 initSearchHistory();
 searchForm.addEventListener('submit', handleSearchFormSubmit);
 searchHistoryContainer.addEventListener('click', handleSearchHistoryClick);
+
