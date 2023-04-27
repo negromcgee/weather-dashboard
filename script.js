@@ -95,19 +95,19 @@ function renderCurrentWeather(city, weather) {
 
 // Function to display a forecast card given an object from open weather api
 // daily forecast.
-function renderForecastCard(forecast) {
+function renderForecastCard(data) {
   // variables for data from api
-  var iconUrl = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
-  var iconDescription = forecast.weather[0].description;
-  var tempF = forecast.main.temp;
-  var humidity = forecast.main.humidity;
-  var windMph = forecast.wind.speed;
+  var iconUrl = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+  var iconDescription = data.weather[0].description;
+  var tempF = data.main.temp;
+  var humidity = data.main.humidity;
+  var windMph = data.wind.speed;
 
   // Create elements for a card
   var col = document.createElement('div');
   var card = document.createElement('div');
   var cardBody = document.createElement('div');
-  var cardTitle = document.createElement('h5');
+  var cardTitle = document.createElement('h2');
   var weatherIcon = document.createElement('img');
   var tempEl = document.createElement('p');
   var windEl = document.createElement('p');
@@ -212,27 +212,27 @@ function fetchCoords(search) {
     });
 }
 
-function handleSearchFormSubmit(e) {
+function handleSearchFormSubmit(event) {
   // Don't continue if there is nothing in the search form
   if (!searchInput.value) {
     return;
   }
 
-  e.preventDefault();
+  event.preventDefault();
   var search = searchInput.value.trim();
   fetchCoords(search);
   searchInput.value = '';
 }
 
-function handleSearchHistoryClick(e) {
+function handleSearchHistoryClick(event) {
   // Don't do search if current elements is not a search history button
-  if (!e.target.matches('.btn-history')) {
+  if (!event.target.matches('.btn-history')) {
+    var btn = event.target;
+  var search = btn.getAttribute('data-search');
+  fetchCoords(search);
     return;
   }
 
-  var btn = e.target;
-  var search = btn.getAttribute('data-search');
-  fetchCoords(search);
 }
 
 initSearchHistory();

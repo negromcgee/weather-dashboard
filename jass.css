@@ -1737,6 +1737,14 @@ label form [type='radio'] {
   vertical-align: middle;
 }
 
+.weather-title {
+  text-align: center;
+  border-bottom: 2px solid black;
+  padding-left:10%;
+  padding-right:10%;
+  margin: 5%;
+}
+
 .history-btn {
   text-align: center;
   display: inline-block;
