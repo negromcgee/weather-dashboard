@@ -1,3 +1,5 @@
+const { default: dayjs } = require("dayjs-ext");
+
 // Global variables
 var searchHistory = [];
 var weatherApiRootUrl = 'https://api.openweathermap.org';
@@ -9,12 +11,16 @@ var searchInput = document.querySelector('#search-input');
 var todayE1 = document.querySelector('#today');
 var forecastE1 = document.querySelector('#forecast');
 var historyE1 = document.querySelector('#history');
+var searchHistory = [];
+
 
 // Add timezone plugins to day.js
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
+
+
 // Function to display the search history list.
-function renderSearchHistory(data, city) {
+function renderDaily(data, city) {
   searchHistoryContainer.innerHTML = '';
 
   // Start at end of history array and count down to show the most recent at the top.
@@ -70,6 +76,7 @@ function renderCurrentWeather(city, weather) {
   var windEl = document.createElement('p');
   var humidityEl = document.createElement('p');
 
+  cardTitle.classList.add("weather-title", "col-12", "pb-2");
   card.setAttribute('class', 'card');
   cardBody.setAttribute('class', 'card-body');
   card.append(cardBody);
@@ -127,7 +134,7 @@ function renderForecastCard(data) {
   humidityEl.setAttribute('class', 'card-text');
 
   // Add content to elements
-  cardTitle.textContent = dayjs(forecast.dt_txt).format('M/D/YYYY');
+  cardTitle.textContent =  "[" + dayjs(forcast.dt_txt).format("MM-DD-YYYY") + "]";
   weatherIcon.setAttribute('src', iconUrl);
   weatherIcon.setAttribute('alt', iconDescription);
   tempEl.textContent = `Temp: ${tempF} °F`;
