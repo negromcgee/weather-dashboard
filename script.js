@@ -6,15 +6,15 @@ var weatherApiKey = "186388b4dd9e731049fc26ae93a4789f";
 // DOM element references
 var searchForm = document.querySelector('#search-form');
 var searchInput = document.querySelector('#search-input');
-var todayContainer = document.querySelector('#today');
-var forecastContainer = document.querySelector('#forecast');
-var searchHistoryContainer = document.querySelector('#history');
+var todayE1 = document.querySelector('#today');
+var forecastE1 = document.querySelector('#forecast');
+var historyE1 = document.querySelector('#history');
 
 // Add timezone plugins to day.js
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 // Function to display the search history list.
-function renderSearchHistory() {
+function renderSearchHistory(data, city) {
   searchHistoryContainer.innerHTML = '';
 
   // Start at end of history array and count down to show the most recent at the top.
