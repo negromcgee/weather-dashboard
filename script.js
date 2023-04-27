@@ -220,16 +220,16 @@ function handleSearchFormSubmit(event) {
 
   event.preventDefault();
   var search = searchInput.value.trim();
-  fetchCoords(search);
+  fetchCoords(data);
   searchInput.value = '';
 }
 
 function handleSearchHistoryClick(event) {
   // Don't do search if current elements is not a search history button
-  if (!event.target.matches('.btn-history')) {
+  if (event.target.matches('.btn-history')) {
     var btn = event.target;
-  var search = btn.getAttribute('data-search');
-  fetchCoords(search);
+  var data = btn.getAttribute('data-search');
+  fetchCoords(data);
     return;
   }
 
@@ -237,5 +237,5 @@ function handleSearchHistoryClick(event) {
 
 initSearchHistory();
 searchForm.addEventListener('submit', handleSearchFormSubmit);
-searchHistoryContainer.addEventListener('click', handleSearchHistoryClick);
+historyE1.addEventListener('click', handleSearchHistoryClick);
 
