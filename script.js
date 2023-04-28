@@ -137,9 +137,17 @@ function renderForecastCard(data) {
   cardTitle.textContent =  "[" + dayjs(forcast.dt_txt).format("MM-DD-YYYY") + "]";
   weatherIcon.setAttribute('src', iconUrl);
   weatherIcon.setAttribute('alt', iconDescription);
-  tempEl.textContent = `Temp: ${tempF} °F`;
-  windEl.textContent = `Wind: ${windMph} MPH`;
-  humidityEl.textContent = `Humidity: ${humidity} %`;
+  tempEl.textContent = "Temperature: " + temperature + "°F";
+  windEl.textContent = "Wind Speed: " + windSpeed + "MPH";
+  humidityEl.textContent = "Humdidity: " + humidity + "%";
+
+  col.appendChild(card);
+  card.appendChild(cardContent);
+  cardTitle.appendChild(weatherIcon);
+  cardBody.appendChild(title);
+  cardBody.appendChild(temperatureEl);
+  cardBody.appendChild(humidityEl);
+  cardBody.appendChild(windSpeedEl);
 
   forecastContainer.append(col);
 }
@@ -151,10 +159,10 @@ function renderForecast(dailyForecast) {
   var endDt = dayjs().add(6, 'day').startOf('day').unix();
 
   var headingCol = document.createElement('div');
-  var heading = document.createElement('h4');
+  var heading = document.createElement('h3');
 
   headingCol.setAttribute('class', 'col-12');
-  heading.textContent = '5-Day Forecast:';
+  heading.textContent = "5 Day Forecast For: " + city;
   headingCol.append(heading);
 
   forecastContainer.innerHTML = '';
@@ -175,7 +183,7 @@ function renderForecast(dailyForecast) {
 
 function renderItems(city, data) {
   renderCurrentWeather(city, data.list[0], data.city.timezone);
-  renderForecast(data.list);
+  renderForecast(data.list, city);
 }
 
 // Fetches weather data for given location from the Weather Geolocation
@@ -185,11 +193,11 @@ function fetchWeather(location) {
   var { lon } = location;
   var city = location.name;
 
-  var apiUrl = "${https://api.openweathermap.org}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${186388b4dd9e731049fc26ae93a4789f}";
+  var apiUrl =  weatherAPIRoot + "/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + weatherAPIKey;
 
   fetch(apiUrl)
-    .then(function (res) {
-      return res.json();
+    .then(function (response) {
+      return response.json();
     })
     .then(function (data) {
       renderItems(city, data);
@@ -200,11 +208,11 @@ function fetchWeather(location) {
 }
 
 function fetchCoords(search) {
-  var apiUrl = "${https://api.openweathermap.org}/geo/1.0/direct?q=${search}&limit=5&appid=${186388b4dd9e731049fc26ae93a4789f}";
+  var apiUrl = weatherAPIRoot + "/geo/1.0/direct?q=" + search + "&limit=5&appid=" + weatherAPIKey;
 
   fetch(apiUrl)
-    .then(function (res) {
-      return res.json();
+    .then(function (response) {
+      return response.json();
     })
     .then(function (data) {
       if (!data[0]) {
