@@ -23,4 +23,4 @@ THEN I am again presented with current and future conditions for that city
 
 ## Screenshot
 
-image.png
+![image](https://user-images.githubusercontent.com/122416848/235020285-ff993e2c-61d0-4706-8ce3-d52658b0066f.png)
